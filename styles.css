@@ -156,6 +156,25 @@ footer {
 }
 
 /* =====================================================
+   BUTTONS
+===================================================== */
+.btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 12px 26px;
+    background-color: #111827;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: bold;
+    transition: 0.25s ease;
+}
+
+.btn:hover {
+    background-color: #1abc9c;
+}
+
+/* =====================================================
    RESPONSIVE (MAIN FIX)
 ===================================================== */
 

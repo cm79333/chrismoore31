@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Evaluation | Christopher Moore</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<header class="site-header">
+    <nav class="main-nav">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="evaluation.html" class="active">Evaluation</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main class="content">
+    <h1>Portfolio Evaluation</h1>
+
+    <!-- Evaluation Content -->
+    <section class="evaluation-section">
+        <h2>Overall Evaluation</h2>
+        <p>
+            This portfolio demonstrates strong web development skills, organization, and an understanding
+            of design principles such as usability, responsiveness, and clarity.
+        </p>
+    </section>
+
+    <!-- ⭐ Review Form -->
+    <section class="evaluation-section">
+        <h2>Leave a Review</h2>
+
+        <form id="reviewForm">
+            <input type="text" id="name" placeholder="Your Name" required>
+
+            <select id="rating" required>
+                <option value="">Rating</option>
+                <option value="5">⭐⭐⭐⭐⭐ (5)</option>
+                <option value="4">⭐⭐⭐⭐ (4)</option>
+                <option value="3">⭐⭐⭐ (3)</option>
+                <option value="2">⭐⭐ (2)</option>
+                <option value="1">⭐ (1)</option>
+            </select>
+
+            <textarea id="comment" placeholder="Write your comment..." required></textarea>
+
+            <button type="submit">Submit Review</button>
+        </form>
+    </section>
+
+    <!-- 💬 Display Reviews -->
+    <section class="evaluation-section">
+        <h2>Reviews</h2>
+        <div id="reviewsContainer"></div>
+    </section>
+</main>
+
+<footer class="footer">
+    <p>&copy; 2026 Christopher Moore</p>
+</footer>
+
+<script>
+    const form = document.getElementById("reviewForm");
+    const reviewsContainer = document.getElementById("reviewsContainer");
+
+    // Load saved reviews
+    let reviews = JSON.parse(localStorage.getItem("reviews")) || [];
+
+    function displayReviews() {
+        reviewsContainer.innerHTML = "";
+        reviews.forEach(review => {
+            const div = document.createElement("div");
+            div.classList.add("review-card");
+
+            div.innerHTML = `
+                <h3>${review.name}</h3>
+                <p>${"⭐".repeat(review.rating)}</p>
+                <p>${review.comment}</p>
+            `;
+
+            reviewsContainer.appendChild(div);
+        });
+    }
+
+    form.addEventListener("submit", function(e) {
+        e.preventDefault();
+
+        const name = document.getElementById("name").value;
+        const rating = document.getElementById("rating").value;
+        const comment = document.getElementById("comment").value;
+
+        const newReview = { name, rating, comment };
+
+        reviews.push(newReview);
+        localStorage.setItem("reviews", JSON.stringify(reviews));
+
+        form.reset();
+        displayReviews();
+    });
+
+    displayReviews();
+</script>
+
+</body>
+</html>
